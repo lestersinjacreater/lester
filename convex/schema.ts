@@ -6,7 +6,7 @@ export default defineSchema({
   users: defineTable({
     username: v.string(),
     email: v.string(),
-    hashedPassword: v.string(), // Store your hashed password here.
+    clerkId: v.string(), // Clerk ID for authentication.
     name: v.optional(v.string()),
     role: v.union(v.literal("admin")), // Only admin for your portfolio.
   }).index("by_email", ["email"]),
