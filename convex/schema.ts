@@ -9,7 +9,7 @@ export default defineSchema({
     clerkId: v.string(), // Clerk ID for authentication.
     name: v.optional(v.string()),
     role: v.union(v.literal("admin")), // Only admin for your portfolio.
-  }).index("by_email", ["email"]),
+  }).index("by_clerk_id", ["clerkId"]), // Index for Clerk ID lookups.
   
   // Education table: Stores academic background details.
   education: defineTable({
