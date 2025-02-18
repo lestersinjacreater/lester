@@ -10,17 +10,22 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.11.3",
+    "clsx": "^2.1.1",
     "convex": "^1.19.2",
+    "framer-motion": "^12.4.4",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "svix": "^1.45.1"
+    "svix": "^1.45.1",
+    "tailwind-merge": "^3.0.1",
+    "three": "^0.167.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.173.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "postcss": "^8",
