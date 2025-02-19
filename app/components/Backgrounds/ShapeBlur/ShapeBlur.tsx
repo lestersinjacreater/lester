@@ -1,6 +1,4 @@
 import React, { useRef, useEffect, FC } from 'react';
-// Three.js has no built-in TypeScript support.
-// Installing @types/three is optional but helps avoid type errors.
 import * as THREE from 'three';
 
 // Vertex Shader
@@ -25,6 +23,10 @@ uniform float u_roundness;
 uniform float u_borderSize;
 uniform float u_circleSize;
 uniform float u_circleEdge;
+
+uniform vec3 u_hoverColor; // Add uniform for hover color
+uniform float u_hoverSize; // Add uniform for hover size
+uniform float u_hoverOpacity; // Add uniform for hover opacity
 
 #ifndef PI
 #define PI 3.1415926535897932384626433832795
@@ -104,7 +106,7 @@ void main() {
 
     float sdfCircle = fill(
         sdCircle(st, posMouse),
-        circleSize,
+        u_hoverSize, // Use hover size
         circleEdge
     );
 
@@ -123,13 +125,12 @@ void main() {
         sdf = fill(sdf, 0.05, sdfCircle) * 1.4;
     }
 
-    vec3 color = vec3(sdf);
+    vec3 color = mix(vec3(sdf), u_hoverColor, sdfCircle); // Mix hover color
     float alpha = step(0.01, sdf);
     gl_FragColor = vec4(color.rgb, alpha);
 }
 `;
 
-// Define the Props interface
 interface ShapeBlurProps {
   className?: string;
   variation?: number;
@@ -141,7 +142,6 @@ interface ShapeBlurProps {
   circleEdge?: number;
 }
 
-// ShapeBlur component definition
 const ShapeBlur: FC<ShapeBlurProps> = ({
   className = '',
   variation = 0,
@@ -196,6 +196,11 @@ const ShapeBlur: FC<ShapeBlurProps> = ({
         u_borderSize: { value: borderSize },
         u_circleSize: { value: circleSize },
         u_circleEdge: { value: circleEdge },
+        u_hoverColor: { value: new THREE.Color(0x0a1f44) }, // Dark blue hover color
+        u_hoverSize: { value: 0.005 }, // Allow values lower than 0.1 for more precision
+        u_hoverOpacity: { value: 1}, // Opacity control for hover effect
+  
+        
       },
       defines: { VAR: variation },
       transparent: true,
@@ -278,14 +283,14 @@ const ShapeBlur: FC<ShapeBlurProps> = ({
     circleEdge,
   ]);
 
-  // Render the container div with the desired styles
+  // Render the ShapeBlur content
   return (
     <div
       ref={mountRef}
       className={`w-full h-full ${className}`}
       style={{
         backdropFilter: "blur(16px) saturate(180%)",
-        backgroundColor: "rgba(17, 25, 40, 0.75)",
+        backgroundColor: "rgba(0, 0, 0, 0)",
         borderRadius: "12px",
         border: "1px solid rgba(255, 255, 255, 0.125)",
       }}
