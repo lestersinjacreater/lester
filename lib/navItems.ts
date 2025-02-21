@@ -1,7 +1,7 @@
 // navItems.ts
 export const navItems = [
   { name: "Ahoy", link: "#home" },
-  { name: "Me", link: "#about" },
+  { name: "Me", link: "#aboutsection" },
   { name: "Show", link: "#showcase" },
   { name: "Epic", link: "#experience" },
   { name: "Cheers", link: "#testimonials" },

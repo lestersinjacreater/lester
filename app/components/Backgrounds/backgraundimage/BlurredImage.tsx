@@ -18,13 +18,17 @@ const BlurredImage: FC<BlurredImageProps> = ({ children }) => {
           alt="Blurred Background"
           layout="fill"
           objectFit="cover"
-          className="blur-2xl"
+          className="blur-1xl"
         />
       </div>
 
       {/* Vertical Line Effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.2)_4px,transparent_3px)] bg-[size:40px_100%] opacity-50 pointer-events-none"></div>
+<div
+  className="absolute inset-0 bg-[linear-gradient(to_right,rgba(10,31,68,0.2)_4px,transparent_3px)] bg-[size:40px_100%] opacity-50 pointer-events-none"
+/>
 
+
+      
       {/* Content */}
       <div className="relative z-10 text-white text-3xl font-bold">
         {children}
