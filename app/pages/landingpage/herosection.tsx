@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ShapeBlur from "@/app/components/Backgrounds/ShapeBlur/ShapeBlur";
 import BlurredImage from "@/app/components/Backgrounds/backgraundimage/BlurredImage";
 
 const HeroSection = () => {
@@ -12,21 +11,30 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center">
-      {/* Blurred Image at the very back */}
-      <BlurredImage className="absolute inset-0 z-0" />
+    <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+      {/* Blurred Background */}
+      <BlurredImage className="-z-10" />
 
-      {/* ShapeBlur in the middle */}
-      {isClient && <ShapeBlur className="absolute inset-0 z-10" />}
+      {/* Hero Content */}
+      <div className="relative z-10 text-center text-gray-500 flex flex-col items-center space-y-8">
+        <div className="text-5xl font-bold mb-4 text-white">
+          Welcome to My Portfolio
+        </div>
 
-      {/* Hero Section content on top
-      <div className="relative z-20 text-center text-gray-500">
-        <h1 className="text-5xl font-bold mb-4">Welcome to My Portfolio</h1>
-        <p className="text-xl mb-8">Showcasing my projects and skills</p>
-        <button className="px-6 py-3 bg-blue-600 rounded-full text-white hover:bg-blue-700">
-          Get Started
-        </button>
-      </div> */}
+        {/* Image Section */}
+        <div className="w-1/2 h-1/2">
+          <img
+            src="/assets/hero-image.jpg" // Make sure this path is correct
+            alt="Hero Image"
+            className="w-full h-full object-cover rounded-lg shadow-lg"
+          />
+        </div>
+
+        {/* Description */}
+        <div className="text-xl text-white">
+          Showcasing my projects and skills
+        </div>
+      </div>
     </div>
   );
 };
